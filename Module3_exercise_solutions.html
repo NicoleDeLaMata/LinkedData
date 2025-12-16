@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Module 3 Solutions – Analysis of Linked Health Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5d2e30ad26079c1dae90a1fd11eba2b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Module3_exercises.html">Module 3</a></li><li class="breadcrumb-item"><a href="./Module3_exercise_solutions.html">Module 3 Solutions</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Analysis of Linked Health Data</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module1_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 1 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module1_exercise_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 1 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module2_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 2 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module2_exercise_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 2 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module3_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 3 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module3_exercise_solutions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Module 3 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module4_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 4 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module4_exercise_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 4 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Module 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module5_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 5 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Module5_exercise_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Module 5 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Acknowledgements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgements</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-set-up" id="toc-data-set-up" class="nav-link active" data-scroll-target="#data-set-up">Data set-up</a></li>
+  <li><a href="#part-one-prevalent-pool-effect" id="toc-part-one-prevalent-pool-effect" class="nav-link" data-scroll-target="#part-one-prevalent-pool-effect">Part One: Prevalent Pool Effect</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
+  <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
+  <li><a href="#part-two-transfers-and-length-of-stay" id="toc-part-two-transfers-and-length-of-stay" class="nav-link" data-scroll-target="#part-two-transfers-and-length-of-stay">Part Two: Transfers and Length of Stay</a></li>
+  <li><a href="#question-7" id="toc-question-7" class="nav-link" data-scroll-target="#question-7">Question 7</a></li>
+  <li><a href="#question-8" id="toc-question-8" class="nav-link" data-scroll-target="#question-8">Question 8</a></li>
+  <li><a href="#question-9" id="toc-question-9" class="nav-link" data-scroll-target="#question-9">Question 9</a></li>
+  <li><a href="#question-10" id="toc-question-10" class="nav-link" data-scroll-target="#question-10">Question 10</a></li>
+  <li><a href="#question-11" id="toc-question-11" class="nav-link" data-scroll-target="#question-11">Question 11</a></li>
+  <li><a href="#question-12" id="toc-question-12" class="nav-link" data-scroll-target="#question-12">Question 12</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Module3_exercises.html">Module 3</a></li><li class="breadcrumb-item"><a href="./Module3_exercise_solutions.html">Module 3 Solutions</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Module 3 Solutions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="data-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="data-set-up">Data set-up</h2>
+<p>See Module 1 Solutions for recommendations on how to import data.</p>
+<p>The following packages were used for the solutions.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for data manipulation</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co"># for skim() to summarise datasets</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled) <span class="co"># for generate_dictionary() to view value labels </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># for tabyl() to create frequency tables</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># for working with date variables</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'skimr' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'labelled' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'janitor' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'
+
+The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+</div>
+<p>We import the data as below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data from Github ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Read in csv file</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/NicoleDeLaMata/LinkedData/refs/heads/main/ppn_subset_2000.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 80512 Columns: 49
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (22): episode_start_date, episode_end_date, diagnosis_codeP, diagnosis_c...
+dbl (27): ppn, age_recode, facility_identifier_recode, episode_length_of_sta...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+</section>
+<section id="part-one-prevalent-pool-effect" class="level2">
+<h2 class="anchored" data-anchor-id="part-one-prevalent-pool-effect">Part One: Prevalent Pool Effect</h2>
+</section>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert date variables to date format then sort the data</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">episode_start_date =</span> <span class="fu">dmy</span>(episode_start_date),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">episode_end_date =</span> <span class="fu">dmy</span>(episode_end_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ppn, episode_start_date, episode_end_date)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Attach labels to mode_of_separation</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000<span class="sc">$</span>mode_of_separation_recode <span class="ot">&lt;-</span> <span class="fu">factor</span>(ppn_subset_2000<span class="sc">$</span>mode_of_separation_recode,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">11</span>,<span class="dv">1</span>)),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Discharge on leave"</span>, <span class="st">"Discharge by hospital"</span>, </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"Discharge own risk"</span>, <span class="st">"Transfer to nursing home"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"Transfer to public psychiatric hospital"</span>, <span class="st">"Transfer to other hospital"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"Death with autopsy"</span>, <span class="st">"Death without autopsy"</span>, </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"Transfer to other accommodation"</span>, <span class="st">"Type change separation"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"Discharge on leave"</span>, <span class="st">"Transfer to palliative care unit/hospice"</span>))</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a flag for patients with any admissions related to ischemic heart disease</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>diag_vars <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"diagnosis_code"</span>, <span class="fu">c</span>(<span class="st">"P"</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">19</span>)))</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>diag_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "diagnosis_codeP"  "diagnosis_code1"  "diagnosis_code2"  "diagnosis_code3" 
+ [5] "diagnosis_code4"  "diagnosis_code5"  "diagnosis_code6"  "diagnosis_code7" 
+ [9] "diagnosis_code8"  "diagnosis_code9"  "diagnosis_code10" "diagnosis_code11"
+[13] "diagnosis_code12" "diagnosis_code13" "diagnosis_code14" "diagnosis_code15"
+[17] "diagnosis_code16" "diagnosis_code17" "diagnosis_code18" "diagnosis_code19"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ihd_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"I20"</span>, <span class="st">"I21"</span>, <span class="st">"I22"</span>, <span class="st">"I24"</span>, <span class="st">"I25"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd =</span> <span class="dv">1</span> <span class="sc">*</span> <span class="fu">if_any</span>(<span class="fu">all_of</span>(diag_vars), <span class="sc">~</span> <span class="fu">str_sub</span>(.x, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">%in%</span> ihd_codes))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a one-way frequency table of ihd to check that flag has been created correctly</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(ihd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ihd     n   percent
+   0 65314 0.8112331
+   1 15198 0.1887669</code></pre>
+</div>
+</div>
+<p><span style="color:red;">There should be 15,198 records coded with ischemic heart disease events</span><br>
+<br>
+## Question 2</p>
+<ol type="A">
+<li>Create a frequency table of <em>year_sep</em> against flag variable ihd. How many acute cardiovascular events occurred in 2002?<br>
+</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a variable for year of separation</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">year_sep =</span> <span class="fu">year</span>(episode_end_date))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Frequency table of year_sep against ihd</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(year_sep, ihd) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>(<span class="at">denominator =</span> <span class="st">"row"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_ns</span>(<span class="at">position =</span> <span class="st">"front"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> year_sep           0           1
+     2000 1,309 (56%) 1,021 (44%)
+     2001 2,981 (74%) 1,069 (26%)
+     2002 4,169 (77%) 1,245 (23%)
+     2003 4,334 (83%)   903 (17%)
+     2004 4,237 (83%)   846 (17%)
+     2005 4,262 (81%) 1,018 (19%)
+     2006 5,056 (86%)   823 (14%)
+     2007 4,436 (86%)   736 (14%)
+     2008 2,996 (87%)   433 (13%)
+     2009 3,038 (88%)   411 (12%)
+     2010 3,176 (79%)   834 (21%)
+     2011 2,590 (80%)   658 (20%)
+     2012 3,181 (87%)   473 (13%)
+     2013 2,841 (84%)   531 (16%)
+     2014 2,694 (84%)   532 (16%)
+     2015 2,987 (83%)   631 (17%)
+     2016 2,981 (82%)   667 (18%)
+     2017 2,289 (79%)   625 (21%)
+     2018 2,102 (79%)   563 (21%)
+     2019 2,145 (76%)   687 (24%)
+     2020 1,510 (75%)   492 (25%)</code></pre>
+</div>
+</div>
+<p><span style="color:red;">1,245 episodes of care related to IHD in 2002 (23% of all episodes of care in 2002)</span><br>
+<br>
+</p>
+<ol start="2" type="A">
+<li>Why do we use year of separation rather than year of admission?<br>
+<span style="color:red;">We use year of separation, not admission, because that is how records are processed within the hospital morbidity system. That is, each record is coded after separation and classified by financial year based on the date of separation.</span><br>
+<br>
+</li>
+</ol>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<ol type="A">
+<li>Create and tabulate <em>ihd_seq</em>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create IHD seq</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd_cumcount =</span> <span class="fu">cumsum</span>(ihd), <span class="co"># cumulative total number of IHD records for each person</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">post_ihd =</span> <span class="fu">as.numeric</span>(ihd_cumcount <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> <span class="co"># Flag records that occur on or after first IHD</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn, post_ihd) <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd_seq =</span> <span class="fu">row_number</span>() <span class="sc">*</span> post_ihd) <span class="sc">%&gt;%</span> <span class="co"># If prior to first IHD, seq = 0, otherwise seq = row number</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Create table of ihd_seq to check</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(ihd_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ihd_seq     n      percent
+       0 38042 4.725010e-01
+       1  8746 1.086298e-01
+       2  7410 9.203597e-02
+       3  6209 7.711894e-02
+       4  5038 6.257452e-02
+       5  3961 4.919764e-02
+       6  2897 3.598221e-02
+       7  1990 2.471681e-02
+       8  1274 1.582373e-02
+       9   798 9.911566e-03
+      10   486 6.036367e-03
+      11   276 3.428060e-03
+      12   189 2.347476e-03
+      13   125 1.552564e-03
+      14    97 1.204789e-03
+      15    83 1.030902e-03
+      16    76 9.439587e-04
+      17    70 8.694356e-04
+      18    67 8.321741e-04
+      19    64 7.949126e-04
+      20    59 7.328100e-04
+      21    56 6.955485e-04
+      22    52 6.458665e-04
+      23    48 5.961844e-04
+      24    47 5.837639e-04
+      25    45 5.589229e-04
+      26    42 5.216614e-04
+      27    38 4.719793e-04
+      28    37 4.595588e-04
+      29    32 3.974563e-04
+      30    31 3.850358e-04
+      31    30 3.726153e-04
+      32    28 3.477742e-04
+      33    28 3.477742e-04
+      34    28 3.477742e-04
+      35    27 3.353537e-04
+      36    27 3.353537e-04
+      37    27 3.353537e-04
+      38    25 3.105127e-04
+      39    25 3.105127e-04
+      40    23 2.856717e-04
+      41    22 2.732512e-04
+      42    22 2.732512e-04
+      43    20 2.484102e-04
+      44    20 2.484102e-04
+      45    19 2.359897e-04
+      46    19 2.359897e-04
+      47    19 2.359897e-04
+      48    19 2.359897e-04
+      49    18 2.235692e-04
+      50    18 2.235692e-04
+      51    17 2.111486e-04
+      52    17 2.111486e-04
+      53    16 1.987281e-04
+      54    16 1.987281e-04
+      55    16 1.987281e-04
+      56    16 1.987281e-04
+      57    16 1.987281e-04
+      58    16 1.987281e-04
+      59    16 1.987281e-04
+      60    16 1.987281e-04
+      61    16 1.987281e-04
+      62    16 1.987281e-04
+      63    15 1.863076e-04
+      64    15 1.863076e-04
+      65    15 1.863076e-04
+      66    15 1.863076e-04
+      67    15 1.863076e-04
+      68    15 1.863076e-04
+      69    15 1.863076e-04
+      70    15 1.863076e-04
+      71    15 1.863076e-04
+      72    15 1.863076e-04
+      73    15 1.863076e-04
+      74    13 1.614666e-04
+      75    12 1.490461e-04
+      76    12 1.490461e-04
+      77    11 1.366256e-04
+      78    11 1.366256e-04
+      79    11 1.366256e-04
+      80    11 1.366256e-04
+      81    11 1.366256e-04
+      82    11 1.366256e-04
+      83    11 1.366256e-04
+      84    11 1.366256e-04
+      85    11 1.366256e-04
+      86    11 1.366256e-04
+      87    10 1.242051e-04
+      88    10 1.242051e-04
+      89    10 1.242051e-04
+      90    10 1.242051e-04
+      91    10 1.242051e-04
+      92    10 1.242051e-04
+      93    10 1.242051e-04
+      94    10 1.242051e-04
+      95     9 1.117846e-04
+      96     9 1.117846e-04
+      97     9 1.117846e-04
+      98     9 1.117846e-04
+      99     9 1.117846e-04
+     100     9 1.117846e-04
+     101     8 9.936407e-05
+     102     8 9.936407e-05
+     103     8 9.936407e-05
+     104     8 9.936407e-05
+     105     8 9.936407e-05
+     106     8 9.936407e-05
+     107     8 9.936407e-05
+     108     8 9.936407e-05
+     109     8 9.936407e-05
+     110     8 9.936407e-05
+     111     8 9.936407e-05
+     112     8 9.936407e-05
+     113     8 9.936407e-05
+     114     8 9.936407e-05
+     115     8 9.936407e-05
+     116     8 9.936407e-05
+     117     8 9.936407e-05
+     118     8 9.936407e-05
+     119     7 8.694356e-05
+     120     7 8.694356e-05
+     121     7 8.694356e-05
+     122     7 8.694356e-05
+     123     7 8.694356e-05
+     124     7 8.694356e-05
+     125     7 8.694356e-05
+     126     7 8.694356e-05
+     127     7 8.694356e-05
+     128     7 8.694356e-05
+     129     7 8.694356e-05
+     130     7 8.694356e-05
+     131     7 8.694356e-05
+     132     7 8.694356e-05
+     133     7 8.694356e-05
+     134     7 8.694356e-05
+     135     7 8.694356e-05
+     136     6 7.452305e-05
+     137     6 7.452305e-05
+     138     6 7.452305e-05
+     139     6 7.452305e-05
+     140     6 7.452305e-05
+     141     6 7.452305e-05
+     142     6 7.452305e-05
+     143     5 6.210254e-05
+     144     4 4.968203e-05
+     145     4 4.968203e-05
+     146     4 4.968203e-05
+     147     4 4.968203e-05
+     148     4 4.968203e-05
+     149     4 4.968203e-05
+     150     4 4.968203e-05
+     151     4 4.968203e-05
+     152     4 4.968203e-05
+     153     4 4.968203e-05
+     154     4 4.968203e-05
+     155     4 4.968203e-05
+     156     4 4.968203e-05
+     157     4 4.968203e-05
+     158     4 4.968203e-05
+     159     4 4.968203e-05
+     160     4 4.968203e-05
+     161     4 4.968203e-05
+     162     4 4.968203e-05
+     163     4 4.968203e-05
+     164     4 4.968203e-05
+     165     4 4.968203e-05
+     166     4 4.968203e-05
+     167     4 4.968203e-05
+     168     4 4.968203e-05
+     169     4 4.968203e-05
+     170     4 4.968203e-05
+     171     4 4.968203e-05
+     172     4 4.968203e-05
+     173     4 4.968203e-05
+     174     4 4.968203e-05
+     175     4 4.968203e-05
+     176     4 4.968203e-05
+     177     4 4.968203e-05
+     178     4 4.968203e-05
+     179     4 4.968203e-05
+     180     4 4.968203e-05
+     181     4 4.968203e-05
+     182     4 4.968203e-05
+     183     4 4.968203e-05
+     184     4 4.968203e-05
+     185     4 4.968203e-05
+     186     4 4.968203e-05
+     187     4 4.968203e-05
+     188     4 4.968203e-05
+     189     4 4.968203e-05
+     190     4 4.968203e-05
+     191     4 4.968203e-05
+     192     4 4.968203e-05
+     193     4 4.968203e-05
+     194     4 4.968203e-05
+     195     4 4.968203e-05
+     196     4 4.968203e-05
+     197     4 4.968203e-05
+     198     4 4.968203e-05
+     199     4 4.968203e-05
+     200     4 4.968203e-05
+     201     4 4.968203e-05
+     202     3 3.726153e-05
+     203     3 3.726153e-05
+     204     3 3.726153e-05
+     205     3 3.726153e-05
+     206     3 3.726153e-05
+     207     3 3.726153e-05
+     208     3 3.726153e-05
+     209     2 2.484102e-05
+     210     2 2.484102e-05
+     211     2 2.484102e-05
+     212     2 2.484102e-05
+     213     2 2.484102e-05
+     214     2 2.484102e-05
+     215     2 2.484102e-05
+     216     2 2.484102e-05
+     217     2 2.484102e-05
+     218     2 2.484102e-05
+     219     2 2.484102e-05
+     220     2 2.484102e-05
+     221     2 2.484102e-05
+     222     2 2.484102e-05
+     223     2 2.484102e-05
+     224     2 2.484102e-05
+     225     2 2.484102e-05
+     226     2 2.484102e-05
+     227     2 2.484102e-05
+     228     2 2.484102e-05
+     229     2 2.484102e-05
+     230     2 2.484102e-05
+     231     2 2.484102e-05
+     232     2 2.484102e-05
+     233     2 2.484102e-05
+     234     2 2.484102e-05
+     235     2 2.484102e-05
+     236     2 2.484102e-05
+     237     2 2.484102e-05
+     238     2 2.484102e-05
+     239     2 2.484102e-05
+     240     2 2.484102e-05
+     241     2 2.484102e-05
+     242     2 2.484102e-05
+     243     2 2.484102e-05
+     244     2 2.484102e-05
+     245     2 2.484102e-05
+     246     2 2.484102e-05
+     247     2 2.484102e-05
+     248     2 2.484102e-05
+     249     2 2.484102e-05
+     250     2 2.484102e-05
+     251     2 2.484102e-05
+     252     2 2.484102e-05
+     253     2 2.484102e-05
+     254     2 2.484102e-05
+     255     2 2.484102e-05
+     256     2 2.484102e-05
+     257     2 2.484102e-05
+     258     2 2.484102e-05
+     259     2 2.484102e-05
+     260     2 2.484102e-05
+     261     2 2.484102e-05
+     262     2 2.484102e-05
+     263     2 2.484102e-05
+     264     2 2.484102e-05
+     265     2 2.484102e-05
+     266     2 2.484102e-05
+     267     2 2.484102e-05
+     268     2 2.484102e-05
+     269     2 2.484102e-05
+     270     2 2.484102e-05
+     271     2 2.484102e-05
+     272     2 2.484102e-05
+     273     2 2.484102e-05
+     274     2 2.484102e-05
+     275     2 2.484102e-05
+     276     2 2.484102e-05
+     277     2 2.484102e-05
+     278     2 2.484102e-05
+     279     2 2.484102e-05
+     280     2 2.484102e-05
+     281     2 2.484102e-05
+     282     2 2.484102e-05
+     283     2 2.484102e-05
+     284     2 2.484102e-05
+     285     2 2.484102e-05
+     286     2 2.484102e-05
+     287     2 2.484102e-05
+     288     2 2.484102e-05
+     289     2 2.484102e-05
+     290     2 2.484102e-05
+     291     2 2.484102e-05
+     292     2 2.484102e-05
+     293     2 2.484102e-05
+     294     2 2.484102e-05
+     295     2 2.484102e-05
+     296     2 2.484102e-05
+     297     2 2.484102e-05
+     298     2 2.484102e-05
+     299     2 2.484102e-05
+     300     2 2.484102e-05
+     301     2 2.484102e-05
+     302     2 2.484102e-05
+     303     2 2.484102e-05
+     304     2 2.484102e-05
+     305     2 2.484102e-05
+     306     2 2.484102e-05
+     307     2 2.484102e-05
+     308     2 2.484102e-05
+     309     2 2.484102e-05
+     310     2 2.484102e-05
+     311     2 2.484102e-05
+     312     2 2.484102e-05
+     313     2 2.484102e-05
+     314     2 2.484102e-05
+     315     2 2.484102e-05
+     316     2 2.484102e-05
+     317     2 2.484102e-05
+     318     2 2.484102e-05
+     319     2 2.484102e-05
+     320     2 2.484102e-05
+     321     2 2.484102e-05
+     322     2 2.484102e-05
+     323     2 2.484102e-05
+     324     2 2.484102e-05
+     325     2 2.484102e-05
+     326     1 1.242051e-05
+     327     1 1.242051e-05
+     328     1 1.242051e-05
+     329     1 1.242051e-05
+     330     1 1.242051e-05
+     331     1 1.242051e-05
+     332     1 1.242051e-05
+     333     1 1.242051e-05
+     334     1 1.242051e-05
+     335     1 1.242051e-05
+     336     1 1.242051e-05
+     337     1 1.242051e-05
+     338     1 1.242051e-05
+     339     1 1.242051e-05
+     340     1 1.242051e-05
+     341     1 1.242051e-05
+     342     1 1.242051e-05
+     343     1 1.242051e-05
+     344     1 1.242051e-05
+     345     1 1.242051e-05
+     346     1 1.242051e-05
+     347     1 1.242051e-05
+     348     1 1.242051e-05
+     349     1 1.242051e-05
+     350     1 1.242051e-05
+     351     1 1.242051e-05
+     352     1 1.242051e-05
+     353     1 1.242051e-05
+     354     1 1.242051e-05
+     355     1 1.242051e-05
+     356     1 1.242051e-05
+     357     1 1.242051e-05
+     358     1 1.242051e-05
+     359     1 1.242051e-05
+     360     1 1.242051e-05
+     361     1 1.242051e-05
+     362     1 1.242051e-05
+     363     1 1.242051e-05
+     364     1 1.242051e-05
+     365     1 1.242051e-05
+     366     1 1.242051e-05
+     367     1 1.242051e-05
+     368     1 1.242051e-05
+     369     1 1.242051e-05
+     370     1 1.242051e-05
+     371     1 1.242051e-05
+     372     1 1.242051e-05
+     373     1 1.242051e-05
+     374     1 1.242051e-05
+     375     1 1.242051e-05
+     376     1 1.242051e-05
+     377     1 1.242051e-05
+     378     1 1.242051e-05
+     379     1 1.242051e-05
+     380     1 1.242051e-05
+     381     1 1.242051e-05
+     382     1 1.242051e-05
+     383     1 1.242051e-05
+     384     1 1.242051e-05
+     385     1 1.242051e-05
+     386     1 1.242051e-05
+     387     1 1.242051e-05
+     388     1 1.242051e-05
+     389     1 1.242051e-05
+     390     1 1.242051e-05
+     391     1 1.242051e-05
+     392     1 1.242051e-05
+     393     1 1.242051e-05
+     394     1 1.242051e-05
+     395     1 1.242051e-05
+     396     1 1.242051e-05
+     397     1 1.242051e-05
+     398     1 1.242051e-05
+     399     1 1.242051e-05
+     400     1 1.242051e-05
+     401     1 1.242051e-05
+     402     1 1.242051e-05
+     403     1 1.242051e-05
+     404     1 1.242051e-05
+     405     1 1.242051e-05
+     406     1 1.242051e-05
+     407     1 1.242051e-05
+     408     1 1.242051e-05
+     409     1 1.242051e-05
+     410     1 1.242051e-05
+     411     1 1.242051e-05
+     412     1 1.242051e-05
+     413     1 1.242051e-05
+     414     1 1.242051e-05
+     415     1 1.242051e-05
+     416     1 1.242051e-05
+     417     1 1.242051e-05
+     418     1 1.242051e-05
+     419     1 1.242051e-05
+     420     1 1.242051e-05
+     421     1 1.242051e-05
+     422     1 1.242051e-05
+     423     1 1.242051e-05
+     424     1 1.242051e-05
+     425     1 1.242051e-05
+     426     1 1.242051e-05
+     427     1 1.242051e-05
+     428     1 1.242051e-05
+     429     1 1.242051e-05
+     430     1 1.242051e-05
+     431     1 1.242051e-05
+     432     1 1.242051e-05
+     433     1 1.242051e-05
+     434     1 1.242051e-05
+     435     1 1.242051e-05
+     436     1 1.242051e-05
+     437     1 1.242051e-05
+     438     1 1.242051e-05
+     439     1 1.242051e-05
+     440     1 1.242051e-05
+     441     1 1.242051e-05
+     442     1 1.242051e-05
+     443     1 1.242051e-05
+     444     1 1.242051e-05
+     445     1 1.242051e-05
+     446     1 1.242051e-05
+     447     1 1.242051e-05
+     448     1 1.242051e-05
+     449     1 1.242051e-05
+     450     1 1.242051e-05
+     451     1 1.242051e-05
+     452     1 1.242051e-05
+     453     1 1.242051e-05
+     454     1 1.242051e-05
+     455     1 1.242051e-05
+     456     1 1.242051e-05
+     457     1 1.242051e-05
+     458     1 1.242051e-05
+     459     1 1.242051e-05
+     460     1 1.242051e-05
+     461     1 1.242051e-05
+     462     1 1.242051e-05
+     463     1 1.242051e-05
+     464     1 1.242051e-05
+     465     1 1.242051e-05
+     466     1 1.242051e-05
+     467     1 1.242051e-05
+     468     1 1.242051e-05
+     469     1 1.242051e-05
+     470     1 1.242051e-05
+     471     1 1.242051e-05
+     472     1 1.242051e-05
+     473     1 1.242051e-05
+     474     1 1.242051e-05
+     475     1 1.242051e-05
+     476     1 1.242051e-05
+     477     1 1.242051e-05
+     478     1 1.242051e-05
+     479     1 1.242051e-05
+     480     1 1.242051e-05
+     481     1 1.242051e-05
+     482     1 1.242051e-05
+     483     1 1.242051e-05
+     484     1 1.242051e-05
+     485     1 1.242051e-05
+     486     1 1.242051e-05
+     487     1 1.242051e-05
+     488     1 1.242051e-05
+     489     1 1.242051e-05
+     490     1 1.242051e-05
+     491     1 1.242051e-05
+     492     1 1.242051e-05
+     493     1 1.242051e-05
+     494     1 1.242051e-05
+     495     1 1.242051e-05
+     496     1 1.242051e-05
+     497     1 1.242051e-05
+     498     1 1.242051e-05
+     499     1 1.242051e-05
+     500     1 1.242051e-05
+     501     1 1.242051e-05
+     502     1 1.242051e-05
+     503     1 1.242051e-05
+     504     1 1.242051e-05
+     505     1 1.242051e-05
+     506     1 1.242051e-05
+     507     1 1.242051e-05
+     508     1 1.242051e-05
+     509     1 1.242051e-05
+     510     1 1.242051e-05
+     511     1 1.242051e-05
+     512     1 1.242051e-05
+     513     1 1.242051e-05
+     514     1 1.242051e-05
+     515     1 1.242051e-05
+     516     1 1.242051e-05
+     517     1 1.242051e-05
+     518     1 1.242051e-05
+     519     1 1.242051e-05
+     520     1 1.242051e-05
+     521     1 1.242051e-05
+     522     1 1.242051e-05
+     523     1 1.242051e-05
+     524     1 1.242051e-05
+     525     1 1.242051e-05
+     526     1 1.242051e-05
+     527     1 1.242051e-05
+     528     1 1.242051e-05
+     529     1 1.242051e-05
+     530     1 1.242051e-05
+     531     1 1.242051e-05
+     532     1 1.242051e-05
+     533     1 1.242051e-05
+     534     1 1.242051e-05
+     535     1 1.242051e-05
+     536     1 1.242051e-05
+     537     1 1.242051e-05
+     538     1 1.242051e-05
+     539     1 1.242051e-05
+     540     1 1.242051e-05
+     541     1 1.242051e-05
+     542     1 1.242051e-05
+     543     1 1.242051e-05
+     544     1 1.242051e-05
+     545     1 1.242051e-05
+     546     1 1.242051e-05
+     547     1 1.242051e-05
+     548     1 1.242051e-05
+     549     1 1.242051e-05
+     550     1 1.242051e-05
+     551     1 1.242051e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">skim</span>(ihd_seq) <span class="co"># Maximum (p100) is 551</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">80512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ihd_seq</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.84</td>
+<td style="text-align: right;">30.81</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">551</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+<ol start="2" type="A">
+<li>Produce a table containing the number of first hospital admissions with ischemic heart disease event (<em>ihd_seq</em> = 1) by year of separation.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create and save a table of year of separation for first IHD hospital admissions</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ihd_year_table_2000 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ihd_seq <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(year_sep) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>ihd_year_table_2000 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year_sep <span class="sc">==</span> <span class="dv">2010</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  year_sep     n percent
+     &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
+1     2010   410  0.0469</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## restrict data to 2008-2020</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2008 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year_sep <span class="sc">&gt;=</span> <span class="dv">2008</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Create IHD seq</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ppn_subset_2008 <span class="ot">&lt;-</span> ppn_subset_2008 <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd_cumcount =</span> <span class="fu">cumsum</span>(ihd), <span class="co"># cumulative total number of IHD records for each person</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">post_ihd =</span> <span class="fu">as.numeric</span>(ihd_cumcount <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> <span class="co"># Flag records that occur on or after first IHD</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn, post_ihd) <span class="sc">%&gt;%</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd_seq =</span> <span class="fu">row_number</span>() <span class="sc">*</span> post_ihd) <span class="sc">%&gt;%</span> <span class="co"># If prior to first IHD, seq = 0, otherwise seq = row number</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Create table of ihd_seq to check</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>ppn_subset_2008 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(ihd_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ihd_seq     n      percent
+       0 26792 6.368888e-01
+       1  5537 1.316234e-01
+       2  3687 8.764590e-02
+       3  2298 5.462714e-02
+       4  1312 3.118834e-02
+       5   679 1.614092e-02
+       6   335 7.963487e-03
+       7   167 3.969858e-03
+       8    97 2.305845e-03
+       9    69 1.640241e-03
+      10    57 1.354981e-03
+      11    53 1.259895e-03
+      12    51 1.212352e-03
+      13    46 1.093494e-03
+      14    42 9.984073e-04
+      15    40 9.508641e-04
+      16    37 8.795493e-04
+      17    34 8.082345e-04
+      18    32 7.606913e-04
+      19    31 7.369197e-04
+      20    26 6.180617e-04
+      21    22 5.229753e-04
+      22    20 4.754320e-04
+      23    16 3.803456e-04
+      24    15 3.565740e-04
+      25    15 3.565740e-04
+      26    15 3.565740e-04
+      27    13 3.090308e-04
+      28    13 3.090308e-04
+      29    13 3.090308e-04
+      30    12 2.852592e-04
+      31    12 2.852592e-04
+      32    10 2.377160e-04
+      33     8 1.901728e-04
+      34     7 1.664012e-04
+      35     7 1.664012e-04
+      36     7 1.664012e-04
+      37     7 1.664012e-04
+      38     7 1.664012e-04
+      39     7 1.664012e-04
+      40     7 1.664012e-04
+      41     7 1.664012e-04
+      42     7 1.664012e-04
+      43     7 1.664012e-04
+      44     7 1.664012e-04
+      45     7 1.664012e-04
+      46     7 1.664012e-04
+      47     7 1.664012e-04
+      48     7 1.664012e-04
+      49     7 1.664012e-04
+      50     7 1.664012e-04
+      51     7 1.664012e-04
+      52     7 1.664012e-04
+      53     7 1.664012e-04
+      54     7 1.664012e-04
+      55     6 1.426296e-04
+      56     6 1.426296e-04
+      57     6 1.426296e-04
+      58     6 1.426296e-04
+      59     6 1.426296e-04
+      60     6 1.426296e-04
+      61     6 1.426296e-04
+      62     6 1.426296e-04
+      63     6 1.426296e-04
+      64     6 1.426296e-04
+      65     6 1.426296e-04
+      66     6 1.426296e-04
+      67     6 1.426296e-04
+      68     6 1.426296e-04
+      69     6 1.426296e-04
+      70     6 1.426296e-04
+      71     6 1.426296e-04
+      72     6 1.426296e-04
+      73     6 1.426296e-04
+      74     5 1.188580e-04
+      75     5 1.188580e-04
+      76     5 1.188580e-04
+      77     5 1.188580e-04
+      78     5 1.188580e-04
+      79     5 1.188580e-04
+      80     5 1.188580e-04
+      81     5 1.188580e-04
+      82     5 1.188580e-04
+      83     5 1.188580e-04
+      84     4 9.508641e-05
+      85     4 9.508641e-05
+      86     4 9.508641e-05
+      87     3 7.131481e-05
+      88     3 7.131481e-05
+      89     2 4.754320e-05
+      90     2 4.754320e-05
+      91     2 4.754320e-05
+      92     2 4.754320e-05
+      93     2 4.754320e-05
+      94     2 4.754320e-05
+      95     2 4.754320e-05
+      96     2 4.754320e-05
+      97     2 4.754320e-05
+      98     2 4.754320e-05
+      99     2 4.754320e-05
+     100     2 4.754320e-05
+     101     2 4.754320e-05
+     102     2 4.754320e-05
+     103     2 4.754320e-05
+     104     2 4.754320e-05
+     105     2 4.754320e-05
+     106     2 4.754320e-05
+     107     2 4.754320e-05
+     108     2 4.754320e-05
+     109     2 4.754320e-05
+     110     2 4.754320e-05
+     111     2 4.754320e-05
+     112     2 4.754320e-05
+     113     2 4.754320e-05
+     114     2 4.754320e-05
+     115     2 4.754320e-05
+     116     2 4.754320e-05
+     117     2 4.754320e-05
+     118     2 4.754320e-05
+     119     2 4.754320e-05
+     120     2 4.754320e-05
+     121     2 4.754320e-05
+     122     2 4.754320e-05
+     123     2 4.754320e-05
+     124     2 4.754320e-05
+     125     2 4.754320e-05
+     126     2 4.754320e-05
+     127     2 4.754320e-05
+     128     2 4.754320e-05
+     129     2 4.754320e-05
+     130     2 4.754320e-05
+     131     2 4.754320e-05
+     132     2 4.754320e-05
+     133     2 4.754320e-05
+     134     2 4.754320e-05
+     135     2 4.754320e-05
+     136     1 2.377160e-05
+     137     1 2.377160e-05
+     138     1 2.377160e-05
+     139     1 2.377160e-05
+     140     1 2.377160e-05
+     141     1 2.377160e-05
+     142     1 2.377160e-05
+     143     1 2.377160e-05
+     144     1 2.377160e-05
+     145     1 2.377160e-05
+     146     1 2.377160e-05
+     147     1 2.377160e-05
+     148     1 2.377160e-05
+     149     1 2.377160e-05
+     150     1 2.377160e-05
+     151     1 2.377160e-05
+     152     1 2.377160e-05
+     153     1 2.377160e-05
+     154     1 2.377160e-05
+     155     1 2.377160e-05
+     156     1 2.377160e-05
+     157     1 2.377160e-05
+     158     1 2.377160e-05
+     159     1 2.377160e-05
+     160     1 2.377160e-05
+     161     1 2.377160e-05
+     162     1 2.377160e-05
+     163     1 2.377160e-05
+     164     1 2.377160e-05
+     165     1 2.377160e-05
+     166     1 2.377160e-05
+     167     1 2.377160e-05
+     168     1 2.377160e-05
+     169     1 2.377160e-05
+     170     1 2.377160e-05
+     171     1 2.377160e-05
+     172     1 2.377160e-05
+     173     1 2.377160e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ppn_subset_2008 <span class="sc">%&gt;%</span> <span class="fu">skim</span>(ihd_seq) <span class="co"># Maximum (p100) is 173</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">42067</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ihd_seq</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">9.11</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create and save a table of year of separation for first IHD hospital admissions</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>ihd_year_table_2008 <span class="ot">&lt;-</span> ppn_subset_2008 <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ihd_seq <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(year_sep) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br>
+<br>
+</p>
+</section>
+<section id="question-5" class="level2">
+<h2 class="anchored" data-anchor-id="question-5">Question 5</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## restrict data to 2010-2020</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2010 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year_sep <span class="sc">&gt;=</span> <span class="dv">2010</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Create IHD seq</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>ppn_subset_2010 <span class="ot">&lt;-</span> ppn_subset_2010 <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd_cumcount =</span> <span class="fu">cumsum</span>(ihd), <span class="co"># cumulative total number of IHD records for each person</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">post_ihd =</span> <span class="fu">as.numeric</span>(ihd_cumcount <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> <span class="co"># Flag records that occur on or after first IHD</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn, post_ihd) <span class="sc">%&gt;%</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ihd_seq =</span> <span class="fu">row_number</span>() <span class="sc">*</span> post_ihd) <span class="sc">%&gt;%</span> <span class="co"># If prior to first IHD, seq = 0, otherwise seq = row number</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Create table of ihd_seq to check</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>ppn_subset_2010 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(ihd_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ihd_seq     n      percent
+       0 22267 6.327830e-01
+       1  5061 1.438234e-01
+       2  3170 9.008497e-02
+       3  1858 5.280059e-02
+       4   971 2.759385e-02
+       5   480 1.364063e-02
+       6   234 6.649805e-03
+       7   106 3.012305e-03
+       8    66 1.875586e-03
+       9    51 1.449317e-03
+      10    45 1.278809e-03
+      11    42 1.193555e-03
+      12    40 1.136719e-03
+      13    36 1.023047e-03
+      14    33 9.377931e-04
+      15    32 9.093751e-04
+      16    29 8.241212e-04
+      17    27 7.672852e-04
+      18    26 7.388673e-04
+      19    24 6.820313e-04
+      20    20 5.683594e-04
+      21    16 4.546875e-04
+      22    14 3.978516e-04
+      23    13 3.694336e-04
+      24    13 3.694336e-04
+      25    13 3.694336e-04
+      26    13 3.694336e-04
+      27    11 3.125977e-04
+      28    11 3.125977e-04
+      29    11 3.125977e-04
+      30    10 2.841797e-04
+      31    10 2.841797e-04
+      32     8 2.273438e-04
+      33     7 1.989258e-04
+      34     7 1.989258e-04
+      35     7 1.989258e-04
+      36     7 1.989258e-04
+      37     7 1.989258e-04
+      38     7 1.989258e-04
+      39     7 1.989258e-04
+      40     7 1.989258e-04
+      41     7 1.989258e-04
+      42     7 1.989258e-04
+      43     7 1.989258e-04
+      44     7 1.989258e-04
+      45     7 1.989258e-04
+      46     7 1.989258e-04
+      47     7 1.989258e-04
+      48     7 1.989258e-04
+      49     7 1.989258e-04
+      50     7 1.989258e-04
+      51     7 1.989258e-04
+      52     6 1.705078e-04
+      53     6 1.705078e-04
+      54     6 1.705078e-04
+      55     5 1.420899e-04
+      56     5 1.420899e-04
+      57     5 1.420899e-04
+      58     5 1.420899e-04
+      59     5 1.420899e-04
+      60     5 1.420899e-04
+      61     5 1.420899e-04
+      62     5 1.420899e-04
+      63     5 1.420899e-04
+      64     5 1.420899e-04
+      65     5 1.420899e-04
+      66     5 1.420899e-04
+      67     5 1.420899e-04
+      68     5 1.420899e-04
+      69     5 1.420899e-04
+      70     5 1.420899e-04
+      71     5 1.420899e-04
+      72     5 1.420899e-04
+      73     5 1.420899e-04
+      74     4 1.136719e-04
+      75     4 1.136719e-04
+      76     4 1.136719e-04
+      77     4 1.136719e-04
+      78     4 1.136719e-04
+      79     4 1.136719e-04
+      80     4 1.136719e-04
+      81     4 1.136719e-04
+      82     4 1.136719e-04
+      83     4 1.136719e-04
+      84     3 8.525391e-05
+      85     3 8.525391e-05
+      86     3 8.525391e-05
+      87     3 8.525391e-05
+      88     3 8.525391e-05
+      89     2 5.683594e-05
+      90     2 5.683594e-05
+      91     2 5.683594e-05
+      92     2 5.683594e-05
+      93     2 5.683594e-05
+      94     2 5.683594e-05
+      95     2 5.683594e-05
+      96     2 5.683594e-05
+      97     2 5.683594e-05
+      98     2 5.683594e-05
+      99     2 5.683594e-05
+     100     2 5.683594e-05
+     101     2 5.683594e-05
+     102     2 5.683594e-05
+     103     2 5.683594e-05
+     104     2 5.683594e-05
+     105     2 5.683594e-05
+     106     2 5.683594e-05
+     107     2 5.683594e-05
+     108     2 5.683594e-05
+     109     2 5.683594e-05
+     110     2 5.683594e-05
+     111     2 5.683594e-05
+     112     2 5.683594e-05
+     113     2 5.683594e-05
+     114     2 5.683594e-05
+     115     2 5.683594e-05
+     116     2 5.683594e-05
+     117     2 5.683594e-05
+     118     2 5.683594e-05
+     119     2 5.683594e-05
+     120     2 5.683594e-05
+     121     2 5.683594e-05
+     122     2 5.683594e-05
+     123     2 5.683594e-05
+     124     2 5.683594e-05
+     125     2 5.683594e-05
+     126     2 5.683594e-05
+     127     2 5.683594e-05
+     128     2 5.683594e-05
+     129     2 5.683594e-05
+     130     2 5.683594e-05
+     131     2 5.683594e-05
+     132     2 5.683594e-05
+     133     2 5.683594e-05
+     134     2 5.683594e-05
+     135     2 5.683594e-05
+     136     1 2.841797e-05
+     137     1 2.841797e-05
+     138     1 2.841797e-05
+     139     1 2.841797e-05
+     140     1 2.841797e-05
+     141     1 2.841797e-05
+     142     1 2.841797e-05
+     143     1 2.841797e-05
+     144     1 2.841797e-05
+     145     1 2.841797e-05
+     146     1 2.841797e-05
+     147     1 2.841797e-05
+     148     1 2.841797e-05
+     149     1 2.841797e-05
+     150     1 2.841797e-05
+     151     1 2.841797e-05
+     152     1 2.841797e-05
+     153     1 2.841797e-05
+     154     1 2.841797e-05
+     155     1 2.841797e-05
+     156     1 2.841797e-05
+     157     1 2.841797e-05
+     158     1 2.841797e-05
+     159     1 2.841797e-05
+     160     1 2.841797e-05
+     161     1 2.841797e-05
+     162     1 2.841797e-05
+     163     1 2.841797e-05
+     164     1 2.841797e-05
+     165     1 2.841797e-05
+     166     1 2.841797e-05
+     167     1 2.841797e-05
+     168     1 2.841797e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ppn_subset_2010 <span class="sc">%&gt;%</span> <span class="fu">skim</span>(ihd_seq) <span class="co"># Maximum (p100) is 168</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">35189</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ihd_seq</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.93</td>
+<td style="text-align: right;">9.43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create and save a table of year of separation for first IHD hospital admissions</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ihd_year_table_2010 <span class="ot">&lt;-</span> ppn_subset_2010 <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ihd_seq <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(year_sep) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br>
+<br>
+</p>
+</section>
+<section id="question-6" class="level2">
+<h2 class="anchored" data-anchor-id="question-6">Question 6</h2>
+<p>Produce a line graph of the annual number of incident cases of ischemic heart disease events from 2010-2020 based on the three datasets you used above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Basic line graph</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plotdata <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  ihd_year_table_2000 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">start =</span> <span class="st">"2000"</span>), <span class="co"># make start year a character not a number, to force R to recognise it as categorical not continuous</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  ihd_year_table_2008 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">start =</span> <span class="st">"2008"</span>),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  ihd_year_table_2010 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">start =</span> <span class="st">"2010"</span>))</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Quick plot to see trends</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> plotdata) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year_sep, <span class="at">y =</span> n, <span class="at">colour =</span> start))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Module3_exercise_solutions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Nicer looking plot (if interested)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> plotdata, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year_sep, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> start),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> plotdata <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(start) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="fu">n</span>()),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> start, <span class="at">colour =</span> start),</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">nudge_x =</span> <span class="fl">0.2</span>, <span class="at">nudge_y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of incident IHD hospitalisations"</span>) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">2020</span>),</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>),</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2000</span><span class="sc">:</span><span class="dv">2020</span>,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">minor_breaks =</span> <span class="cn">NULL</span>,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">250</span>),</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">50</span>),</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"2000"</span> <span class="ot">=</span> <span class="st">"forestgreen"</span>,</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"2008"</span> <span class="ot">=</span> <span class="st">"royalblue"</span>,</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"2010"</span> <span class="ot">=</span> <span class="st">"firebrick"</span>)) <span class="sc">+</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">11</span>), </span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>), </span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"black"</span>),</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"grey95"</span>, <span class="at">linewidth =</span> <span class="fl">0.7</span>),</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"grey98"</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>),</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">l =</span> <span class="dv">5</span>, <span class="at">r =</span> <span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Module3_exercise_solutions_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol type="A">
+<li>What do you notice about the frequencies compared between the three datasets?<br>
+<span style="color:red;">Frequencies are higher when starting the analysis in more recent years. This is because we are incorrectly counting IHD hospitalisations as incident IHD, when in fact there was a historical IHD hospitalisation earlier than the start of our analysis dataset.</span><br>
+<br>
+</li>
+<li>Do you think a 4-year clearance period would be sufficient for obtaining an accurate estimate of incident cases in 2010? <span style="color:red;">In the full analysis dataset (2000-2020), the number of incident IHD hospitalisations is initially high (due to the prevalent pool effect) but reaches a steady state after about 7-8 years. A 4-year clearance period would probably not be sufficient to accurately estimate incident IHD hospitalisations.</span><br>
+<br>
+</li>
+</ol>
+</section>
+<section id="part-two-transfers-and-length-of-stay" class="level2">
+<h2 class="anchored" data-anchor-id="part-two-transfers-and-length-of-stay">Part Two: Transfers and Length of Stay</h2>
+</section>
+<section id="question-7" class="level2">
+<h2 class="anchored" data-anchor-id="question-7">Question 7</h2>
+<p>Define how you would appropriately construct a study population with all the available hospitalisation data to determine length of stay for ischemic heart disease patients. Consider what records should be included. What important assumptions have we made in constructing this study population?<br>
+<span style="color:red;"><strong>Steps for constructing the study population:</strong></span></p>
+<p><span style="color:red;">1. Determine which episodes of care were part of the same hospital admission.</span></p>
+<p><span style="color:red;">2. Flag any hospital admissions where any diagnosis code within any episode of care was related to IHD.</span></p>
+<p><span style="color:red;">3. Remove episodes of care if there was no IHD flagged for the entire hospital admission.</span></p>
+<p><span style="color:red;">4. Calculate length of stay for each hospital admission (latest episode end date minus earliest episode start date).</span></p>
+<p><span style="color:red;">5. Collapse the dataset to one row per person per IHD hospital admission, keeping the length of stay for each admission.</span></p>
+<p><span style="color:red;"><strong>Assumptions:</strong></span></p>
+<p><span style="color:red;">1. Hospital admissions are for ischemic heart disease even if the primary diagnosis code was unrelated.</span></p>
+<p><span style="color:red;">2. For hospital admissions where ischemic heart disease was diagnosed partway through, we are assuming the entire length of stay was attributable to ischemic heart disease.</span></p>
+<p><span style="color:red;">3. All transfers have been accounted for correctly, and there were no interstate transfers.</span><br>
+<br>
+</p>
+</section>
+<section id="question-8" class="level2">
+<h2 class="anchored" data-anchor-id="question-8">Question 8</h2>
+<ol type="A">
+<li>Looking at observations relating to ppn “34” and year of separation = 2005. Which episodes of care have overlapping dates and how many total hospital admissions did this person have?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Observations for ppn 34 and year of separation 2005</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span>   </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ppn <span class="sc">==</span> <span class="dv">34</span> <span class="sc">&amp;</span> year_sep<span class="sc">==</span><span class="dv">2005</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ppn, episode_start_date, episode_end_date, mode_of_separation_recode) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+    ppn episode_start_date episode_end_date mode_of_separation_recode 
+  &lt;dbl&gt; &lt;date&gt;             &lt;date&gt;           &lt;fct&gt;                     
+1    34 2005-05-28         2005-05-28       Discharge by hospital     
+2    34 2005-08-10         2005-08-17       Discharge by hospital     
+3    34 2005-09-12         2005-09-12       Discharge by hospital     
+4    34 2005-09-12         2005-09-15       Discharge by hospital     
+5    34 2005-10-26         2005-10-26       Transfer to other hospital
+6    34 2005-10-26         2005-10-31       Discharge by hospital     </code></pre>
+</div>
+</div>
+<p><span style="color:red;">PPN 34 (2005) = 6 episodes, 5 admissions:</span></p>
+<p><span style="color:red;">- #3 and #4 overlap (#3 end date is same as #4 start date). But they are two separate admissions. #3 is a single-day admission, #4 is an entirely new admission</span></p>
+<p><span style="color:red;">- #5 and #6 overlap (#5 end date is same as #6 start date). #5 ends with a transfer, so these are both part of the same admission.</span><br>
+<br>
+</p>
+<ol start="2" type="A">
+<li>Looking at observations relating to ppn “62” and year of separation = 2007. Which episodes of care have overlapping dates and how many total hospital admissions did this person have?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Observations for ppn 62 and year of separation 2007</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span>   </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ppn <span class="sc">==</span> <span class="dv">62</span> <span class="sc">&amp;</span> year_sep<span class="sc">==</span><span class="dv">2007</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ppn, episode_start_date, episode_end_date, mode_of_separation_recode) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+    ppn episode_start_date episode_end_date mode_of_separation_recode 
+  &lt;dbl&gt; &lt;date&gt;             &lt;date&gt;           &lt;fct&gt;                     
+1    62 2007-02-11         2007-02-19       Transfer to other hospital
+2    62 2007-02-19         2007-02-19       Discharge by hospital     
+3    62 2007-02-19         2007-02-28       Discharge by hospital     
+4    62 2007-03-14         2007-03-16       Discharge by hospital     
+5    62 2007-08-20         2007-08-20       Discharge by hospital     
+6    62 2007-10-07         2007-11-10       Discharge by hospital     </code></pre>
+</div>
+</div>
+<p><span style="color:red;">PPN 62 (2007) = 6 episodes, 5 admissions</span></p>
+<p><span style="color:red;">- #1, #2, and #3 overlap (#1 end date is same as #2 start date, and #2 end date is same as #3 start date)</span></p>
+<p><span style="color:red;">- #1 ends with a transfer, so #1 and #2 are both part of the same admission</span></p>
+<p><span style="color:red;">- #2 ends with a discharge, so #2 and #3 are different admissions.</span><br>
+<br>
+</p>
+<ol start="3" type="A">
+<li>Looking at observations relating to ppn “216” and year of separation = 2010. Which episodes of care have overlapping dates and how many total hospital admissions did this person have?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Observations for ppn 216 and year of separation 2010</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span>   </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ppn <span class="sc">==</span> <span class="dv">216</span> <span class="sc">&amp;</span> year_sep<span class="sc">==</span><span class="dv">2010</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ppn, episode_start_date, episode_end_date, mode_of_separation_recode) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 4
+    ppn episode_start_date episode_end_date mode_of_separation_recode 
+  &lt;dbl&gt; &lt;date&gt;             &lt;date&gt;           &lt;fct&gt;                     
+1   216 2010-01-31         2010-02-09       Discharge by hospital     
+2   216 2010-02-21         2010-02-21       Transfer to other hospital
+3   216 2010-02-26         2010-02-26       Transfer to other hospital
+4   216 2010-02-26         2010-02-26       Discharge by hospital     
+5   216 2010-02-26         2010-03-02       Discharge by hospital     
+6   216 2010-04-03         2010-04-13       Discharge by hospital     
+7   216 2010-07-18         2010-07-20       Discharge by hospital     </code></pre>
+</div>
+</div>
+<p><span style="color:red;">PPN 216 (2010) = 7 episodes, 6 admissions</span></p>
+<p><span style="color:red;">- #3, #4, and #5 overlap (#3 end = #4 start, #4 end = #5 start)</span></p>
+<p><span style="color:red;">- #3 ends with a transfer, so #3 and #4 are part of the same admission</span></p>
+<p><span style="color:red;">- #4 ends with a discharge, so #4 and #5 are different admissions</span></p>
+<p><span style="color:red;">- #2 ends with a transfer, but none of the other records have dates that align, so this possibly an interstate transfer, or an error</span><br>
+<br>
+</p>
+<ol start="4" type="A">
+<li>Looking at observations relating to ppn “286” and year of separation = 2003. Which episodes of care have overlapping dates and how many total hospital admissions did this person have?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Observations for ppn 286 and year of separation 2003</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span>   </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ppn <span class="sc">==</span> <span class="dv">286</span> <span class="sc">&amp;</span> year_sep<span class="sc">==</span><span class="dv">2003</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ppn, episode_start_date, episode_end_date, mode_of_separation_recode) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+    ppn episode_start_date episode_end_date mode_of_separation_recode 
+  &lt;dbl&gt; &lt;date&gt;             &lt;date&gt;           &lt;fct&gt;                     
+1   286 2002-12-28         2003-01-03       Discharge by hospital     
+2   286 2003-01-13         2003-01-18       Discharge by hospital     
+3   286 2003-03-22         2003-03-22       Transfer to other hospital
+4   286 2003-03-22         2003-04-10       Transfer to other hospital
+5   286 2003-03-24         2003-03-25       Transfer to other hospital
+6   286 2003-04-10         2003-04-13       Death without autopsy     </code></pre>
+</div>
+</div>
+<p><span style="color:red;">PPN 286 (2003) = 6 episodes, 3 admissions</span></p>
+<p><span style="color:red;">- #3, #4, #5, and #6 all overlap (#3 end = #4 start, #4 end = #6 start, and #5 starts and ends in between #4 start and end)</span></p>
+<p><span style="color:red;">- #3 ends with a transfer, so #3 and #4 are part of the same admission</span></p>
+<p><span style="color:red;">- #5 ends with a transfer, so #5 is entirely within #4 (i.e.&nbsp;a nested transfer)</span></p>
+<p><span style="color:red;">- #4 ends with a transfer, so #4 and #6 are part of the same admission</span><br>
+<br>
+</p>
+<ol start="5" type="A">
+<li>What further information would be helpful in deciding which transfers align to the same hospital admission?</li>
+</ol>
+<p><span style="color:red;">It would be helpful to know:</span></p>
+<p><span style="color:red;">- The time of day of each episode start and end, to decide whether episodes of care on the same day that end in discharge are genuinely separate admissions or if this is an error and they should be part of the same admission.</span></p>
+<p><span style="color:red;">- How each episode started (‘mode of admission’) to determine if the patient was transferred from elsewhere or was a new admission.</span></p>
+<p><span style="color:red;">- The hospital where each episode of care took place, and the hospital that the patient was transferred from and to.</span><br>
+<br>
+</p>
+</section>
+<section id="question-9" class="level2">
+<h2 class="anchored" data-anchor-id="question-9">Question 9</h2>
+<p>Define the data processing steps that would be necessary to identify and group together the episodes of care to reflect the same hospitalisation admission.<br>
+<span style="color:red;">If an episode of care is nested within another episode of care, it must be part of the same admission. We would take the earliest episode start date and latest episode end date to define the admission</span></p>
+<p><span style="color:red;">If an episode starts on the same day that another ends, we would need to check the mode of separation, as well as the facility code, facility transferred from, and facility transferred to. Then we can determine which episode end date would be most appropriate</span></p>
+<p><span style="color:red;">If an episode of care does not have overlapping dates with another episode of care, they are two separate admissions and each episode start date and end date can be used respectively.</span><br>
+<br>
+</p>
+</section>
+<section id="question-10" class="level2">
+<h2 class="anchored" data-anchor-id="question-10">Question 10</h2>
+<p>Apply the provided transfers code <em>transfers()</em> to add variables to your dataset to identify which episodes of care belong to the same hospital admission. Identify the number of transfers (including type changes):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load transfers package</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'devtools' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: usethis</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'usethis' was built under R version 4.4.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"james-hedley/transfers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 4.4 from https://cran.r-project.org/bin/windows/Rtools/.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Skipping install of 'transfers' from a github remote, the SHA1 (2f69320d) has not changed since last install.
+  Use `force = TRUE` to force installation</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(transfers)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Identify transfers in the analysis dataset</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transfers</span>(<span class="at">id =</span> <span class="st">"ppn"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">admdate =</span> <span class="st">"episode_start_date"</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">sepdate =</span> <span class="st">"episode_end_date"</span>,</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">mode =</span> <span class="st">"mode_of_separation_recode"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br>
+<br>
+</p>
+<ol type="A">
+<li>How many periods of stay contained one or more transfers? What is the maximum number of transfers?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Check transseq</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(transseq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> transseq     n      percent
+        0 79583 9.884613e-01
+        1   551 6.843700e-03
+        2    91 1.130266e-03
+        3    58 7.203895e-04
+        4    45 5.589229e-04
+        5    37 4.595588e-04
+        6    28 3.477742e-04
+        7    25 3.105127e-04
+        8    23 2.856717e-04
+        9    16 1.987281e-04
+       10    10 1.242051e-04
+       11     9 1.117846e-04
+       12     6 7.452305e-05
+       13     6 7.452305e-05
+       14     5 6.210254e-05
+       15     5 6.210254e-05
+       16     4 4.968203e-05
+       17     4 4.968203e-05
+       18     2 2.484102e-05
+       19     2 2.484102e-05
+       20     2 2.484102e-05</code></pre>
+</div>
+</div>
+<p><span style="color:red;">There should be 79,135 <em>transseq</em> values of 0. 839 admissions (periods of stay) contained 1 or more transfers (transseq = 1). The maximum number of transfers within any admission was 22.</span><br>
+<br>
+</p>
+<ol start="2" type="A">
+<li>Examine a portion of the dataset to check that you have identified transfers correctly.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Check PPN 286 as an example</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>ppn_subset_2000 <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ppn <span class="sc">==</span> <span class="dv">286</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ppn, episode_start_date, episode_end_date, mode_of_separation_recode, stayseq, transseq, totlos) <span class="sc">%&gt;%</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 34 × 7
+     ppn episode_start_date episode_end_date mode_of_separation_recode  stayseq
+   &lt;dbl&gt; &lt;date&gt;             &lt;date&gt;           &lt;fct&gt;                        &lt;dbl&gt;
+ 1   286 2000-08-29         2000-08-29       Discharge by hospital            1
+ 2   286 2000-11-07         2000-11-07       Discharge by hospital            2
+ 3   286 2001-01-09         2001-01-15       Discharge by hospital            3
+ 4   286 2001-03-28         2001-03-30       Discharge by hospital            4
+ 5   286 2001-05-16         2001-05-16       Discharge by hospital            5
+ 6   286 2001-05-22         2001-05-22       Transfer to other hospital       6
+ 7   286 2001-05-22         2001-05-26       Discharge by hospital            7
+ 8   286 2001-05-25         2001-05-25       Transfer to other hospital       7
+ 9   286 2001-05-30         2001-06-01       Transfer to other hospital       8
+10   286 2001-06-01         2001-06-07       Transfer to other hospital       9
+# ℹ 24 more rows
+# ℹ 2 more variables: transseq &lt;dbl&gt;, totlos &lt;drtn&gt;</code></pre>
+</div>
+</div>
+<p><span style="color:red;">We checked PPN 286 as an example.</span><br>
+<br>
+</p>
+</section>
+<section id="question-11" class="level2">
+<h2 class="anchored" data-anchor-id="question-11">Question 11</h2>
+<p>Using all the available data in the data set, create a data set containing only records relating to ischemic heart disease events.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create analysis dataset restricted to episodes of care related to IHD</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="ot">&lt;-</span> ppn_subset_2000 <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ihd <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br>
+<br>
+</p>
+</section>
+<section id="question-12" class="level2">
+<h2 class="anchored" data-anchor-id="question-12">Question 12</h2>
+<p>Calculate the mean length of stay by:</p>
+<ol type="A">
+<li>ignoring transfers (i.e., assume each episode of care is a separate hospital admission, with transfers representing a ‘new’ admission).</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean LOS ignoring transfers</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="sc">%&gt;%</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">los =</span> <span class="fu">as.numeric</span>(episode_end_date <span class="sc">-</span> episode_start_date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>(los)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">15198</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">los</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">11.1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="color:red;">Ignoring transfers and counting each episode of care: Mean = 6.49 days</span><br>
+<br>
+</p>
+<ol start="2" type="A">
+<li>accounting for transfers (i.e., where all episodes of care for a single hospital admission have been linked)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean LOS accounting for transfers (count each admission once)</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ppn, stayseq) <span class="sc">%&gt;%</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">los =</span> <span class="fu">as.numeric</span>(totlos)) <span class="sc">%&gt;%</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>(los)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">15161</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">los</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.22</td>
+<td style="text-align: right;">10.98</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean LOS accounting for transfers (count each episode of care)</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">los =</span> <span class="fu">as.numeric</span>(totlos)) <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>(los)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">15198</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">63</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">los</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.27</td>
+<td style="text-align: right;">11.04</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="color:red;">Accounting for transfers and counting each admission only once: Mean = 7.28 days</span></p>
+<p><span style="color:red;">Accounting for transfers and counting each episode of care: Mean = 7.39 days</span><br>
+<br>
+</p>
+<ol start="3" type="A">
+<li>compare these with the mean of the existing APDC variable <em>episode_length_of_stay</em>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean LOS provided</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="sc">%&gt;%</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>(episode_length_of_stay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">15198</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">62</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">episode_length_of_stay</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">11.09</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="color:red;">Using provided episode_length_of_stay and counting each episode of care: Mean = 6.49 days</span><br>
+<br>
+</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
