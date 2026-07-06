@@ -1,1 +1,3 @@
-Online data resources for the "analysis of linked health data" short course.
+# Analysis of Linked Health Data
+
+Datasets required for importing into R as part of exercises, data wrangling and other for the "Analysis of Linked Health Data" unit (PUBH5215) and short course.
